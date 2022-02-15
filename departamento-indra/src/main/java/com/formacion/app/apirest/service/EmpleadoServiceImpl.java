@@ -60,11 +60,24 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	@Override
 	public String loginEmpleado(String dni, String password) {
 		int loginEmpleado = this.empleadoDAO.loginEmpleado(dni, password);
-		if(loginEmpleado == 1) {
+		String loginMensaje = "";
+
+		// SI encuentra un empleado con ese dni y pwd
+		if (loginEmpleado == 1) {
 			return "Has iniciado sesion";
 		} else {
-			return "Usuario o contraseña incorrectos";
+			// Verificar que dato se ha enviado mal, dni o pwd
+			Empleado isDni = this.empleadoDAO.findByDni(dni);
+			if (isDni == null) {
+				loginMensaje += "DNI incorrecto";
+			}
+			Empleado isPassword = this.empleadoDAO.findByDniAndPassword(dni, password);
+			if (isPassword == null) {
+				loginMensaje += " contraseña incorrecta";
+			}
+
 		}
+		return loginMensaje;
 	}
 
 }
