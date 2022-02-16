@@ -14,4 +14,6 @@ public interface EmpleadoDAO  extends CrudRepository<Empleado, Long>{
 	
 	 Empleado findByDni(String dni);
 	 Empleado findByDniAndPassword(String dni,String password);
+	 
+	 Empleado findByUsername(String username);
 }

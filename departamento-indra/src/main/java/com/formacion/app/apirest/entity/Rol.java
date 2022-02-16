@@ -20,6 +20,7 @@ public class Rol implements Serializable {
 	@Column(name = "id_rol")
 	private long id_rol;
 	
+	@Column(unique = true)
 	private String tipo_empleado;
 
 	public long getId_rol() {
